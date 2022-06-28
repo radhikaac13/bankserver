@@ -1,33 +1,53 @@
-  node is an asynchronous technology
-  node - server/back end technology
-  express is the framework of node,so here express is used for server creation
+#   node is an asynchronous technology
+#   node - server/back end technology
+#   express is the framework of node,so here express is used for server creation
 
-  basic commands
-        1.create package.json--npm init 
-        2.install express--npm i express 
-        3.install JWT token --npm i jsonwebtoken
+#   basic commands
+#         1.create package.json--npm init 
+#         2.install express--npm i express 
+#         3.install JWT token --npm i jsonwebtoken
+#         4.install mongoose-npm i mongoose
+#         5.install cors--npm i cors
+  
+  
+  
+  
+#   basic steps
+#      1.create package.json
+#      2.install express
+#      3.create index.js file
+#      4.import express
+#      5.server application create using express
+#      6.set up port number for server
+#      7.client http request resolving
+#         server-app.http-request(path,callback)
+#      8.Response status codes that server can send to the client
+#         1xx--information
+#         2xx--success
+#         3xx--redirection
+#         4xx--client error
+#         5xx--server error
+#       9.JWTtoken - user validation
+#           2 steps
+#          token generate-sign()
+#          token verify-verify()
 
-  basic steps
-     1.create package.json
-     2.install express
-     3.create index.js file
-     4.import express
-     5.server application create using express
-     6.set up port number for server
-     7.client http request resolving
-        server-app.http-request(path,callback)
-     8.Response status codes that server can send to the client
-        1xx--information
-        2xx--success
-        3xx--redirection
-        4xx--client error
-        5xx--server error
-      9.JWTtoken - user validation
-          2 steps
-         token generate-sign()
-         token verify-verify()
+#       10.Middileware--its a function that perform before the request processes,it can stop the request response cycle
+#          2 types of middileware creation
+#            application specific --entire application goes through the middleware
+#            router specific --middleware applied on certain api's
 
-      10.Middileware--its a function that perform before the request processes,it can stop the request response cycle
-         2 types of middileware creation
-           application specific --entire application goes through the middleware
-           router specific --middleware applied on certain api's
+
+#       11.mongo DB connection
+#          install  mongoose
+#          create db.js file
+#          import mongoose in db.js
+#          state connection string using mongoose
+#          create model
+#          export model
+         
+#       12.aynchronous function resolving -promise
+#          resolved state-- .then()
+#          reject state-- catch()
+      
+#       13.CORS-cross origin resource sharing

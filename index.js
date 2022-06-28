@@ -2,14 +2,26 @@
 
 //1.import express
 const express = require('express')
+//import jsonwebtoken
+
+
+const jwt=require('jsonwebtoken')
+
+//import cors
+const cors=require('cors')
+
 //importing dataservice
 const dataServive=require('./services/data.service')
 
 //server application create using express
  const app = express()
 
- //import jsonwebtoken
-const jwt=require('jsonwebtoken')
+ 
+//cors use in server app
+app.use(cors({
+  origin:'http://localhost:4200'
+}))
+
 
 
  //parse json data
@@ -49,35 +61,47 @@ const jwtMiddleware = (req,res,next)=>{
 
 //register API
 app.post('/register',(req,res)=>{
-  //register solving
-const result=dataServive.register(req.body.username,req.body.acno,req.body.password)
-res.status(result.statusCode).json(result) // js leth client lek snd cheyan res venam..res nn status paranja method und....aa statusil value venam..alredy resultil status code nd..athinte akathnn statuscode ne edthu..ennit aa resultine json aaki
+  //register solving-asynchronous
+dataServive.register(req.body.username,req.body.acno,req.body.password)
+.then(result=>{
+  res.status(result.statusCode).json(result) 
+  })
 })
 
 
 //login API
 app.post('/login',(req,res)=>{
-const result=dataServive.login(req.body.acno,req.body.pswd)
-res.status(result.statusCode).json(result) // js leth client lek snd cheyan res venam..res nn status paranja method und....aa statusil value venam..alredy resultil status code nd..athinte akathnn statuscode ne edthu..ennit aa resultine json aaki
+dataServive.login(req.body.acno,req.body.pswd)
+.then(result=>{
+  res.status(result.statusCode).json(result) // js leth client lek snd cheyan res venam..res nn status paranja method und....aa statusil value venam..alredy resultil status code nd..athinte akathnn statuscode ne edthu..ennit aa resultine json aaki
+
+})
 })
 
 //deposit API
 app.post('/deposit',jwtMiddleware, (req,res)=>{
-  const result=dataServive.deposit(req.body.acno,req.body.password,req.body.amt)
-  res.status(result.statusCode).json(result) // js leth client lek snd cheyan res venam..res nn status paranja method und....aa statusil value venam..alredy resultil status code nd..athinte akathnn statuscode ne edthu..ennit aa resultine json aaki
+  dataServive.deposit(req.body.acno,req.body.password,req.body.amt)
+  .then(result=>{
+    res.status(result.statusCode).json(result) // js leth client lek snd cheyan res venam..res nn status paranja method und....aa statusil value venam..alredy resultil status code nd..athinte akathnn statuscode ne edthu..ennit aa resultine json aaki
+  
+  })
   })
   
 //withdraw API
 app.post('/withdraw',jwtMiddleware, (req,res)=>{
-  const result=dataServive.withdraw(req.body.acno,req.body.password,req.body.amt)
-  res.status(result.statusCode).json(result) // js leth client lek snd cheyan res venam..res nn status paranja method und....aa statusil value venam..alredy resultil status code nd..athinte akathnn statuscode ne edthu..ennit aa resultine json aaki
+  dataServive.withdraw(req.body.acno,req.body.password,req.body.amt)
+  .then(result=>{
+    res.status(result.statusCode).json(result) // js leth client lek snd cheyan res venam..res nn status paranja method und....aa statusil value venam..alredy resultil status code nd..athinte akathnn statuscode ne edthu..ennit aa resultine json aaki
   })
+})
 
 //transaction API
 app.post('/transaction',jwtMiddleware, (req,res)=>{
-  const result=dataServive.getTransaction(req.body.acno)
-  res.status(result.statusCode).json(result) // js leth client lek snd cheyan res venam..res nn status paranja method und....aa statusil value venam..alredy resultil status code nd..athinte akathnn statuscode ne edthu..ennit aa resultine json aaki
+  dataServive.getTransaction(req.body.acno)
+  .then(result=>{
+    res.status(result.statusCode).json(result) // js leth client lek snd cheyan res venam..res nn status paranja method und....aa statusil value venam..alredy resultil status code nd..athinte akathnn statuscode ne edthu..ennit aa resultine json aaki
   })
+ })
 
 
 
